@@ -1,51 +1,29 @@
-/*global Todos, Ember */
+/*global Ember */
+/*global DS */
+/*global hoodie */
 (function () {
   'use strict';
 
-  Todos.TodosController = Ember.ArrayController.extend({
-    actions: {
-      createTodo: function () {
-        var title, todo;
+  DS.HoodieAdapter = DS.Adapter.extend(Ember.Evented, {
 
-        // Get the todo title set by the "New Todo" text field
-        title = this.get('newTitle').trim();
-        if (!title) {
-          return;
-        }
-
-        // Create the new Todo model
-        todo = this.store.createRecord('todo', {
-          title: title,
-          isCompleted: false
-        });
-        todo.save();
-
-        // Clear the "New Todo" text field
-        this.set('newTitle', '');
-      },
-
-      clearCompleted: function () {
-        var completed = this.get('completed');
-        completed.invoke('deleteRecord');
-        completed.invoke('save');
-      },
+    find: function(store, type, id/*, opts*/) {
+      return hoodie.store.find(type.typeKey, id);
     },
 
-    /* properties */
+    findAll: function (store, type) {
+      return hoodie.store.findAll(type.typeKey);
+    },
 
-    remaining: Ember.computed.filterBy('content', 'isCompleted', false),
-    completed: Ember.computed.filterBy('content', 'isCompleted', true),
+    createRecord: function (store, type, record) {
+      return hoodie.store.add(type.typeKey, record);
+    },
 
-    allAreDone: function (key, value) {
-      if (value !== undefined) {
-        this.setEach('isCompleted', value);
-        return value;
-      } else {
-        var length = this.get('length');
-        var completedLength = this.get('completed.length');
+    updateRecord: function (store, type, record) {
+      return hoodie.store.update(type.typeKey, record.id);
+    },
 
-        return length > 0 && length === completedLength;
-      }
-    }.property('length', 'completed.length')
+    deleteRecord: function (store, type, record) {
+      return hoodie.store.remove(type.typeKey, record.id);
+    }
   });
-})();
+}());
