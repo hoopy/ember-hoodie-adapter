@@ -1,0 +1,23 @@
+{
+  "name": "ember-hoodie-adapter",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gr2m/ember-hoodie-adapter",
+  "authors": [
+    "Gregor Martynus"
+  ],
+  "description": "Store your ember application data with Hoodie.",
+  "main": "ember-hoodie-adapter.js",
+  "keywords": [
+    "ember",
+    "ember-data",
+    "hoodie"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "bower_components"
+  ],
+  "dependencies": {
+    "ember-data": ">= 1.0.0-beta.6",
+    "ember": ">= 1.0.0"
+  }
+}
