@@ -16,6 +16,12 @@
 
   DS.HoodieAdapter = DS.Adapter.extend(Ember.Evented, {
 
+    init: function() {
+      hoodie.remote.on('change', function() {
+        console.log('handle change!', arguments)
+      });
+    },
+
     find: function(store, type, id/*, opts*/) {
       return wrapJqueryPromise( hoodie.store.find(type.typeKey, id) );
 
@@ -27,13 +33,11 @@
     },
 
     createRecord: function (store, type, record) {
-      return wrapJqueryPromise( hoodie.store.add(type.typeKey, record) );
-
+      return wrapJqueryPromise( hoodie.store.add(type.typeKey, record.toJSON()) );
     },
 
     updateRecord: function (store, type, record) {
-      return wrapJqueryPromise( hoodie.store.update(type.typeKey, record.id) );
-
+      return wrapJqueryPromise( hoodie.store.update(type.typeKey, record.id, record.toJSON()) );
     },
 
     deleteRecord: function (store, type, record) {
