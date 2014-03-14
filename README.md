@@ -3,37 +3,25 @@ Ember Data Hoodie Adapter
 
 Store your ember application data with [Hoodie](http://hood.ie)
 
-I'm new to Ember, please help me :)
------------------------------------
+The Code is [really simple](https://github.com/gr2m/ember-hoodie-adapter/blob/master/ember-hoodie-adapter.js).
+Note that I'm new to Ember and things might be missing, but it works
+for me so far.
 
-I used Ember for the first time today, your feedback & bug fixes
-are much appreciated.
+Installation
+------------
 
-The Code so simple thus far, I can as well just paste it here:
+Install with [bower](http://bower.io)
 
-```js
-DS.HoodieAdapter = DS.Adapter.extend(Ember.Evented, {
-
-  find: function(store, type, id/*, opts*/) {
-    return hoodie.store.find(type.typeKey, id);
-  },
-
-  findAll: function (store, type) {
-    return hoodie.store.findAll(type.typeKey);
-  },
-
-  createRecord: function (store, type, record) {
-    return hoodie.store.add(type.typeKey, record);
-  },
-
-  updateRecord: function (store, type, record) {
-    return hoodie.store.update(type.typeKey, record.id);
-  },
-
-  deleteRecord: function (store, type, record) {
-    return hoodie.store.remove(type.typeKey, record.id);
-  }
-});
+```
+bower install -S ember-hoodie-adapter
 ```
 
-Looking good? Anything missing? [Let me know](https://github.com/gr2m/ember-hoodie-adapter)
+Fine Print
+----------
+
+The Ember Data Hoodie Adapter have been authored by [Gregor Martynus](https://github.com/gr2m),
+proud member of [Team Hoodie](http://hood.ie/). Support our work on Hoodie: [gittip us](https://www.gittip.com/hoodiehq/).
+
+License: MIT
+
+
